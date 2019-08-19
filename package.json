@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server",
     "build": "webpack",
     "lint": "standard",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch",
+    "test:coverage": "jest --coverage --colors"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,20 @@
   "homepage": "https://github.com/contracamilo/advanced_react_2019.git#readme",
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "ajv": "^6.10.2",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "jest-enzyme": "^7.1.0",
     "standard": "^13.1.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
@@ -35,6 +46,7 @@
   "dependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-icons": "^3.7.0",
     "styled-components": "^4.3.2"
   },
   "standard": {
@@ -45,6 +57,26 @@
   "eslintConfig": {
     "extends": [
       "./node_modules/standard/eslintrc.json"
+    ]
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/enzyme.config.js"
+    ],
+    "transform": {
+      "\\.js$": "babel-jest"
+    },
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
     ]
   }
 }

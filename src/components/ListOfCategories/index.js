@@ -1,11 +1,11 @@
 import React from 'react'
-import { Category } from '../categories'
+import { Category } from '../Categories'
 import { List, Item } from './styles'
 import { categories } from '../../../api/db.json'
 
 export const ListOfCategories = () => {
   return (
-    <div>
+    <React.Fragment>
       <List>
         {
           categories.map((category, index) =>
@@ -15,6 +15,6 @@ export const ListOfCategories = () => {
           )
         }
       </List>
-    </div>
+    </React.Fragment>
   )
 }
