@@ -5,7 +5,7 @@ import { MdFavoriteBorder } from 'react-icons/md'
 const DEFAULT_IMAGE = 'https://i.imgur.com/dJa0Hpl.jpg'
 
 export const PhotoCard = ({ id, likes = 0, src }) => (
-  <article>
+  <article data-test={'photoCard'}>
     <a href={`/detail/${id}`}>
       <ImgWrapper>
         <Img src={DEFAULT_IMAGE} alt='img' />
