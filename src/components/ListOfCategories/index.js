@@ -1,18 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { Category } from '../Categories'
 import { List, Item } from './styles'
+import { Loading } from '../helpers/Loading'
 
-export const ListOfCategories = () => {
+/**
+ * Custom Hook to fetch data and update the state and returns an object, also manage the loading state
+ * @Hook
+ * @function useCategoriesDate
+ * @returns { categories }
+ */
+
+const useCategoriesData = () => {
   const [categories, setCategories] = useState([])
-  const [showFixed, setShowFixed] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     window.fetch('https://camigram-server-k44zscah9.now.sh/categories')
       .then(res => res.json())
       .then(response => {
         setCategories(response)
+        setLoading(false)
       })
   }, []) // [] second param only one time
+
+  return { categories, loading }
+}
+
+/**
+ * Functional react component for show List Of categories, works with the custom hook useCategoriesData
+ * @function ListOfCategories
+ * @returns {JSX.Element} rendered comp (fixed if the scroll is over 200px)
+ */
+
+export const ListOfCategories = () => {
+  const { categories, loading } = useCategoriesData()
+  const [showFixed, setShowFixed] = useState(false)
 
   useEffect(() => {
     const onScroll = e => {
@@ -26,16 +49,22 @@ export const ListOfCategories = () => {
   }, [showFixed])
 
   const renderList = (fixed) => (
-    <List className={fixed ? 'fixed' : ''}>
+    <List fixed={fixed}>
       {
-        categories.map((category, index) =>
-          <Item key={category.id}>
-            <Category {...category} />
-          </Item>
-        )
+        loading
+          ? <Loading />
+          : categories.map((category, index) =>
+            <Item key={category.id}>
+              <Category {...category} />
+            </Item>
+          )
       }
     </List>
   )
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <React.Fragment>
