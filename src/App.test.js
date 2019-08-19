@@ -1,14 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Enzyme, { shallow } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
+import { findByTestAttr } from '../utils/testUtils'
 
-import App from './App'
+import { App } from './App'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-it('renders without crashing', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<App />, div)
-  ReactDOM.unmountComponentAtNode(div)
+test('Rendering without errors', () => {
+  const wrapper = shallow(<App />)
+  const component = findByTestAttr(wrapper, 'component-app')
+  expect(component.length).toBe(1)
 })

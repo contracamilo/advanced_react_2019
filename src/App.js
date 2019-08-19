@@ -3,15 +3,13 @@ import { ListOfCategories } from './components/ListOfCategories'
 import { GlobalStyle } from './GlobalStyles'
 import { ListOfPhotoCards } from './components/ListOfPhotoCards'
 
-const App = () => {
+export const App = () => {
   return (
-    <React.Fragment>
+    <div data-test={'component-app'}>
       <GlobalStyle />
       <h1>Hello</h1>
       <ListOfCategories />
       <ListOfPhotoCards />
-    </React.Fragment>
+    </div>
   )
 }
-
-export default App
