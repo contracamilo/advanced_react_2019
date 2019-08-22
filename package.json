@@ -4,7 +4,6 @@
   "description": "advanced React",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build",
     "dev": "webpack-dev-server",
     "build": "webpack",
     "lint": "standard",
