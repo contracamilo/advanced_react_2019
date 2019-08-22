@@ -4,11 +4,12 @@
   "description": "advanced React",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack",
-    "lint": "standard",
-    "test": "jest --watch",
-    "test:coverage": "jest --coverage --colors"
+    "start": "npx run build",
+    "dev": "npx run webpack-dev-server",
+    "build": "npx run webpack",
+    "lint": "npx run standard",
+    "test": "npx jest --watch",
+    "test:coverage": "npx jest --coverage --colors"
   },
   "repository": {
     "type": "git",
