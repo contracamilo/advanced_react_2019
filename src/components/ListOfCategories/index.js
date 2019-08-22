@@ -16,7 +16,7 @@ const useCategoriesData = () => {
 
   useEffect(() => {
     setLoading(true)
-    window.fetch('https://camigram-server-k44zscah9.now.sh/categories')
+    window.fetch('https://camigram-server.camiloriveraq.now.sh/categories')
       .then(res => res.json())
       .then(response => {
         setCategories(response)

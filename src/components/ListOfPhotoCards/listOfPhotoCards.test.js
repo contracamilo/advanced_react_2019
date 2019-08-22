@@ -4,7 +4,7 @@ import Enzyme, { shallow } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 
 import { findByTestAttr } from '../../../utils/testUtils'
-import { ListOfPhotoCards } from './index'
+import { ListOfPhotoCardsComponent } from './index'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
@@ -18,11 +18,11 @@ const defaultProps = { success: false }
  */
 const setup = (props = {}) => {
   const setupProps = { ...defaultProps, ...props }
-  return shallow(<ListOfPhotoCards {...setupProps} />)
+  return shallow(<ListOfPhotoCardsComponent {...setupProps} />)
 }
 
 test('Rendering without errors', () => {
-  const wrapper = shallow(<ListOfPhotoCards />)
+  const wrapper = shallow(<ListOfPhotoCardsComponent />)
   const component = findByTestAttr(wrapper, 'photoCards')
   expect(component.length).toBe(1)
 })

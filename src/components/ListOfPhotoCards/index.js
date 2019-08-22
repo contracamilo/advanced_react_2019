@@ -6,13 +6,14 @@ import { PhotoCard } from '../PhotoCard'
  * @function ListOfPhotoCards
  * @returns {JSX.Element} rendered list of Photo Cards
  */
-export const ListOfPhotoCards = () => {
+
+export const ListOfPhotoCardsComponent = ({ data: { photos = [] } = {} }) => {
   return (
     <div data-test={'photoCards'}>
       <ul>
-        {[1, 2, 3, 4, 5, 6, 7].map(id =>
-          <li >
-            <PhotoCard key={id} id={id} />
+        {photos.map((photo, index) =>
+          <li key={index}>
+            <PhotoCard key={photo.id} {...photo} />
           </li>
         )}
       </ul>
