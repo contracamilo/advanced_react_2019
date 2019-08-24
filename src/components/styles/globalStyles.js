@@ -21,12 +21,21 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 500px;
     overscroll-behavior: none;
     width: 100%; 
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
+
+
 
   #app {
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     overflow-x: hidden;
     min-height: 100vh;
     padding-bottom: 10px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `

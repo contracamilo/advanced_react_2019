@@ -1,5 +1,6 @@
 import React from 'react'
 import { Article, ImgWrapper, Img } from './styles'
+import { Link } from '@reach/router'
 
 // custom hooks
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -28,11 +29,11 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
     <Article ref={el} data-test={'photoCard'}>
       {
         show && <React.Fragment>
-          <a href={`/?detail=${id}`}> {/* Query String */}
+          <Link to={`/detail/${id}`}> {/* Query String */}
             <ImgWrapper>
               <Img src={src} alt='img' />
             </ImgWrapper>
-          </a>
+          </Link>
           <ToggleLikeMutation>
             {
               (toggleLike) => {

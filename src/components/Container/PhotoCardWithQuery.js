@@ -6,16 +6,16 @@ import { Loading } from '../helpers/Loading'
 import { ErrorMessage } from '../helpers/ErrorMessage'
 
 const GET_SINGLE_PHOTO = gql`
-    query getSinglePhoto($id: ID!) {
-        photo(id: $id) {
-        id
-        categoryId
-        src
-        likes
-        userId
-        liked
-        }
-    }
+query getSinglePhoto($id:ID!) {
+  photo(id:$id) {
+    id
+    categoryId
+    src
+    likes
+    userId
+    liked
+  }
+}
 `
 /**
  * Render Props function receives all the data to render as props.
@@ -25,11 +25,11 @@ const GET_SINGLE_PHOTO = gql`
  * @param data all the data for the single card
  * @returns {JSX.Element} Component to render
  */
-const renderCard = ({ loading, error, data }) => {
-  const { photo = {} } = data
-
-  if (error) return <ErrorMessage {...error} />
+const renderCard = ({ loading, error, data = {} }) => {
   if (loading) return <Loading />
+  if (error) return <ErrorMessage error={error.message} />
+
+  const { photo = {} } = data
   return <PhotoCard {...photo} />
 }
 
@@ -41,6 +41,6 @@ const renderCard = ({ loading, error, data }) => {
  */
 export const PhotoCardWithQuery = ({ id }) => (
   <Query query={GET_SINGLE_PHOTO} variables={{ id }}>
-    {renderCard}
+    { renderCard }
   </Query>
 )
