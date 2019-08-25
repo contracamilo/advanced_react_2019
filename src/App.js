@@ -19,7 +19,7 @@ import Context from './Context'
  */
 export const App = () => {
   return (
-    <Fragment>
+    <div data-test={'component-app'}>
       <GlobalStyle />
       <Logo />
       <Router>
@@ -44,7 +44,7 @@ export const App = () => {
       </Context.Consumer>
 
       <NavBar />
-    </Fragment>
+    </div>
   )
 }
 
