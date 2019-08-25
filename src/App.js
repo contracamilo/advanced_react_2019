@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { GlobalStyle } from './components/styles/globalStyles'
 import { Logo } from './components/Logo'
 import { NavBar } from './components/Navbar'
@@ -10,16 +10,7 @@ import { Favs } from './pages/Favs'
 import { Detail } from './pages/Detail'
 
 import { Router } from '@reach/router'
-
-/**
- * Function that recieve by props is the user was authentcated
- * @function UserLogged
- * @param { isAuth } prop is true if the user is authenticated
- * @returns {children} rendered hi childen
- */
-const UserLogged = ({ children }) => {
-  return children({ isAuth: true })
-}
+import Context from './Context'
 
 /**
  * Main component of the app.
@@ -28,7 +19,7 @@ const UserLogged = ({ children }) => {
  */
 export const App = () => {
   return (
-    <div>
+    <Fragment>
       <GlobalStyle />
       <Logo />
       <Router>
@@ -37,7 +28,7 @@ export const App = () => {
         <Detail path='/detail/:detailId' />
       </Router>
 
-      <UserLogged>
+      <Context.Consumer>
         {
           ({ isAuth }) =>
             isAuth
@@ -50,10 +41,10 @@ export const App = () => {
                 <UnregistedUser path='/user' />
               </Router>
         }
-      </UserLogged>
+      </Context.Consumer>
 
       <NavBar />
-    </div>
+    </Fragment>
   )
 }
 
