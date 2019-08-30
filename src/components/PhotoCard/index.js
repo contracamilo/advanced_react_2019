@@ -3,7 +3,6 @@ import { Article, ImgWrapper, Img } from './styles'
 import { Link } from '@reach/router'
 
 // custom hooks
-import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useNearScreen } from '../../hooks/useNearScreen'
 import { FavButton } from '../FavButton'
 import { ToggleLikeMutation } from '../Container/ToggleLikeMutation'
@@ -19,10 +18,8 @@ const DEFAULT_IMAGE = 'https://i.imgur.com/dJa0Hpl.jpg'
  * @returns {JSX.Element} rendered a single Card
  */
 
-export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
-  const key = `like-${id}`
+export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
   // hooks
-  const [liked, setLiked] = useLocalStorage(key, false)
   const [show, el] = useNearScreen()
 
   return (
@@ -38,11 +35,9 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
             {
               (toggleLike) => {
                 const handleFavClick = () => {
-                  !liked && toggleLike({ variables: {
+                  toggleLike({ variables: {
                     input: { id }
                   } })
-
-                  setLiked(!liked)
                 }
 
                 return <FavButton liked={liked} likes={likes} onClick={handleFavClick} />

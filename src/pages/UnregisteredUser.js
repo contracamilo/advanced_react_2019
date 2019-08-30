@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import Context from '../Context'
+import React, { Fragment, useContext } from 'react'
+import { Context } from '../Context'
 import { UserForm } from '../components/UserForm'
 import { RegisterMutation } from '../components/Container/RegisterMutation'
 import { LoginMutation } from '../components/Container/LoginMutations'
@@ -23,62 +23,56 @@ import { LoginMutation } from '../components/Container/LoginMutations'
  */
 
 export const UnregistedUser = () => {
-  return (
-    <Context.Consumer>
+  const { activateAuth } = useContext(Context)
+
+  return <Fragment>
+    <RegisterMutation>
+      {
+        (register, { data, loading, error }) => {
+          const onSubmit = ({ email, password }) => {
+            const input = { email, password }
+            const variables = { input }
+            register({ variables }).then(({ data }) => {
+              const { signup } = data
+              activateAuth(signup)
+            })
+          }
+
+          const errorMsg = error && 'This email is registered now'
+
+          return <UserForm
+            disabled={loading}
+            error={errorMsg}
+            title='Sing Up'
+            onSubmit={onSubmit}
+          />
+        }
+      }
+    </RegisterMutation>
+
+    <LoginMutation>
       {
 
-        ({ activateAuth }) => {
-          return (
-            <Fragment>
-              <RegisterMutation>
-                {
-                  (register, { data, loading, error }) => {
-                    const onSubmit = ({ email, password }) => {
-                      const input = { email, password }
-                      const variables = { input }
-                      register({ variables }).then(activateAuth)
-                    }
+        (login, { data, loading, error }) => {
+          const onSubmit = ({ email, password }) => {
+            const input = { email, password }
+            const variables = { input }
+            login({ variables }).then(({ data }) => {
+              const { login } = data
+              activateAuth(login)
+            })
+          }
 
-                    const errorMsg = error && 'This email is registered now'
+          const errorMsg = error && 'An arror ocurred please verify you information!'
 
-                    return <UserForm
-                      disabled={loading}
-                      error={errorMsg}
-                      title='Sing Up'
-                      onSubmit={onSubmit}
-                    />
-                  }
-                }
-              </RegisterMutation>
-
-              <LoginMutation>
-                {
-
-                  (login, { data, loading, error }) => {
-                    const onSubmit = ({ email, password }) => {
-                      const input = { email, password }
-                      const variables = { input }
-                      login({ variables }).then(activateAuth)
-                    }
-
-                    const errorMsg = error && 'An arror ocurred please verify you information!'
-
-                    return <UserForm
-                      disabled={loading}
-                      error={errorMsg}
-                      title='Sing In'
-                      onSubmit={onSubmit}
-                    />
-                  }
-                }
-              </LoginMutation>
-
-            </Fragment>
-
-          )
+          return <UserForm
+            disabled={loading}
+            error={errorMsg}
+            title='Sing In'
+            onSubmit={onSubmit}
+          />
         }
-
       }
-    </Context.Consumer>
-  )
+    </LoginMutation>
+  </Fragment>
 }
