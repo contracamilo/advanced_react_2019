@@ -4,11 +4,11 @@
   "description": "advanced React",
   "main": "index.js",
   "scripts": {
-    "start": "npx build",
-    "dev": "npx webpack-dev-server --history-api-fallback",
-    "build": "npx webpack",
-    "lint": "npx standard",
-    "test": "npx jest --watch",
+    "start": "build",
+    "dev": "webpack-dev-server --history-api-fallback",
+    "build": "webpack",
+    "lint": "standard",
+    "test": "jest --watch",
     "test:coverage": "jest --coverage --colors"
   },
   "repository": {
