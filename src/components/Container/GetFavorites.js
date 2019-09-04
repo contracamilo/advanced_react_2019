@@ -7,7 +7,7 @@ import { ErrorMessage } from '../helpers/ErrorMessage'
 import { ListOfFavs } from '../ListOfFavs'
 
 const GET_FAVS = gql`
-    query getFavs {
+  query getFavs {
     favs {
       id
       categoryId
@@ -20,6 +20,7 @@ const GET_FAVS = gql`
 
 const renderProp = ({ loading, error, data }) => {
   if (loading) return <Loading />
+  if (!data) return <p>...And oyur favs?</p>
   if (error) return <ErrorMessage error={error.message} />
   const { favs } = data
 

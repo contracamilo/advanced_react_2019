@@ -3,7 +3,7 @@ import { ListOfCategories } from '../components/ListOfCategories'
 import { ListOfPhotoCards } from '../components/Container/ListOfPhotoCard'
 import { Helmet } from 'react-helmet'
 
-export const Home = ({ categoryId }) => {
+const HomePage = ({ categoryId }) => {
   return (
     <Fragment>
       <Helmet>
@@ -18,3 +18,7 @@ export const Home = ({ categoryId }) => {
     </Fragment>
   )
 }
+
+export const Home = React.memo(HomePage, (prevProps, props) => {
+  return prevProps.categoryId === props.categoryId
+})

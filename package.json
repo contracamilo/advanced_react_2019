@@ -4,11 +4,12 @@
   "description": "advanced React",
   "main": "index.js",
   "scripts": {
-    "start": "build",
-    "dev": "webpack-dev-server --history-api-fallback",
+    "now-build": "npm run build",
     "build": "webpack",
     "lint": "standard",
-    "test": "jest --watch",
+    "dev": "webpack-dev-server --history-api-fallback",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve:dev": "webpack --mode 'development' && npx serve dist -s",
     "test:coverage": "jest --coverage --colors"
   },
   "repository": {
@@ -43,7 +44,9 @@
     "standard": "^13.1.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.8.0",
+    "webpack-pwa-manifest": "^4.0.0",
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
